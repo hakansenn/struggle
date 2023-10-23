@@ -3,3 +3,9 @@ index="network" source="cisco_firewall.cef"
 |where num_dest_port >20 OR num_dest_ip >20
 
 
+index="network" source="cisco_firewall.cef" | eval time_bucket = floor(_time/300)*300  | stats  count by time_bucket, src, dpt  | where  count > 20
+
+index="network" source="cisco_firewall.cef"
+| bin span=5m _time
+| stats dc(dpt) as num_dest_port by src
+|where num_dest_port >20
