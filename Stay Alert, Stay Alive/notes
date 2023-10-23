@@ -1,0 +1,5 @@
+index="network" source="cisco_firewall.cef" 
+| stats dc(dpt) as num_dest_port dc(dst) as num_des_ip by src
+|where num_dest_port >20 OR num_dest_ip >20
+
+
